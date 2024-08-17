@@ -170,6 +170,8 @@ export class SettingUtils {
             item.value = value;
             this.updateElementFromValue(key);
             await this.save();
+            //reload window
+            window.location.reload();
         }
     }
 
@@ -201,6 +203,9 @@ export class SettingUtils {
     async takeAndSave(key: string) {
         let value = this.take(key, true);
         await this.save();
+
+                //reload window
+                window.location.reload();
         return value;
     }
 

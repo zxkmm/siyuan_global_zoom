@@ -1,8 +1,8 @@
 {
-  "name": "plugin-sample-vite-svelte",
-  "author": "frostime",
-  "url": "https://github.com/siyuan-note/plugin-sample-vite-svelte",
-  "version": "0.3.5",
+  "name": "siyuan_global_zoom",
+  "author": "zxkmm",
+  "url": "https://github.com/siyuan-note/siyuan_global_zoom",
+  "version": "0.0.1",
   "minAppVersion": "3.0.12",
   "backends": [
     "windows",
@@ -14,18 +14,17 @@
   ],
   "frontends": [
     "desktop",
-    "mobile",
     "browser-desktop",
     "browser-mobile",
     "desktop-window"
   ],
   "displayName": {
-    "en_US": "Plugin sample with vite and svelte",
-    "zh_CN": "插件样例 vite + svelte 版"
+    "en_US": "SiYuan Zoom Helper",
+    "zh_CN": "缩放助手"
   },
   "description": {
-    "en_US": "SiYuan plugin sample with vite and svelte",
-    "zh_CN": "使用 vite 和 svelte 开发的思源插件样例"
+    "en_US": "show the zoom level on your status bar",
+    "zh_CN": "状态栏显示缩放比例"
   },
   "readme": {
     "en_US": "README.md",
@@ -33,10 +32,10 @@
   },
   "funding": {
     "custom": [
-      ""
+      "https://github.com/zxkmm/zxkmm"
     ]
   },
   "keywords": [
-    "plugin", "sample", "插件样例"
+    "zoom", "缩放", "放大", "缩小", "status bar", "状态栏", "zxkmm"
   ]
 }
