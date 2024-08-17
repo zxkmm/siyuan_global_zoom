@@ -1,4 +1,9 @@
 ---
+mainSwitch: 总开关
+baseZoomNumber: 基础缩放倍数
+baseZoomNumberDesc: 你的操作系统的缩放倍数，这会给思源本体带来基本缩放，请在这里输入，以便插件把该倍数记为100% AKA 1
+mainShowZoomInfo: 要显示的信息
+mainShowZoomInfoDesc: 选中的会显示在状态栏，然后另一个值会显示在悬浮标记上
 addTopBarIcon: 使用插件添加一个顶栏按钮
 cancel: 取消
 save: 保存

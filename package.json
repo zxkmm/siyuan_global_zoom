@@ -1,11 +1,11 @@
 {
   "name": "siyuan_global_zoom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "show the zoom level on your status bar",
   "repository": "",
   "homepage": "",
-  "author": "frostime",
+  "author": "zxkmm",
   "license": "MIT",
   "scripts": {
     "make-link": "node  --no-warnings ./scripts/make_dev_link.js",

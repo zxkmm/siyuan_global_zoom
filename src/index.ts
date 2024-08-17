@@ -21,13 +21,34 @@ export default class siyuan_global_zoom extends Plugin {
       plugin: this,
       name: STORAGE_NAME,
     });
+
     this.settingUtils.addItem({
-      key: "zoomRescuveMode",
+      key: "mainSwitch",
       value: true,
       type: "checkbox",
-      title: "总开关",
+      title: this.i18n.mainSwitch,
       description: "",
     });
+
+    this.settingUtils.addItem({
+      key: "baseZoomNumber",
+      value: 1,
+      type: "textinput",
+      title: this.i18n.baseZoomNumber,
+      description: this.i18n.baseZoomNumberDesc,
+  });
+
+  this.settingUtils.addItem({
+    key: "mainShowZoomInfo",
+    value: 1,
+    type: "select",
+    title: this.i18n.mainShowZoomInfo,
+    description: this.i18n.mainShowZoomInfoDesc,
+    options: {
+      1: "100%",
+      2: "1×",
+      },
+  });
 
     this.settingUtils.addItem({
       key: "Hint",
@@ -89,13 +110,24 @@ export default class siyuan_global_zoom extends Plugin {
   // }
 
   showZoomInfoAndCallback() {
+    const _mainShowZoomInfo_ = this.settingUtils.get("mainShowZoomInfo");
+    const _baseZoomNumber_ = this.settingUtils.get("baseZoomNumber");
     const zoomInfoElement = document.createElement("div");
     zoomInfoElement.classList.add("toolbar__item", "ariaLabel");
-    zoomInfoElement.setAttribute("aria-label", "AKA 100%");
+    if(_mainShowZoomInfo_ == 1){
+      zoomInfoElement.setAttribute("aria-label", "AKA 1×");
+    } else if(_mainShowZoomInfo_ == 2){
+      zoomInfoElement.setAttribute("aria-label", "AKA 100%");
+    }
   
     const updateZoomInfo = () => {
-      zoomInfoElement.textContent = `${(window.devicePixelRatio / 1.25 * 100).toFixed(0)}%`;
+      if (_mainShowZoomInfo_ == 1) {
+      zoomInfoElement.textContent = `${(window.devicePixelRatio / _baseZoomNumber_ * 100).toFixed(0)}%`;
       zoomInfoElement.setAttribute("aria-label", `AKA ${window.devicePixelRatio}×`);
+      } else if (_mainShowZoomInfo_ == 2){
+      zoomInfoElement.textContent = `${window.devicePixelRatio}×`;
+      zoomInfoElement.setAttribute("aria-label", `AKA ${(window.devicePixelRatio / _baseZoomNumber_ * 100).toFixed(0)}%`);
+      }
     };
   
     updateZoomInfo();
@@ -108,7 +140,7 @@ export default class siyuan_global_zoom extends Plugin {
   }
 
   onLayoutReady() {
-    if(this.settingUtils.get("zoomRescuveMode")){
+    if(this.settingUtils.get("mainSwitch")){
     // this.rescuveDangerousZoom();
     this.showZoomInfoAndCallback();
 
@@ -119,12 +151,9 @@ export default class siyuan_global_zoom extends Plugin {
   }
 
   async onunload() {
-    console.log(this.i18n.byePlugin);
-    showMessage("Goodbye SiYuan Plugin");
-    console.log("onunload");
+
   }
 
   uninstall() {
-    console.log("uninstall");
   }
 }
