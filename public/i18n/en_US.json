@@ -4,6 +4,7 @@
     "baseZoomNumberDesc": "The zoom factor of your operating system, which brings basic scaling to SiYuan itself. Please enter it here so that the plugin can record this factor as 100% AKA 1.",
     "mainShowZoomInfo": "Information to Display",
     "mainShowZoomInfoDesc": "The selected item will be displayed in the status bar, and the other value will be shown on the hover marker.",
+    "dontDisplayIf100":"Don't display if 100%",
     "addTopBarIcon": "Add a top bar icon by plugin",
     "cancel": "Cancel",
     "save": "Save",

@@ -30,5 +30,9 @@
     "vite": "^5.0.0",
     "vite-plugin-static-copy": "^1.0.2",
     "vite-plugin-zip-pack": "^1.0.5"
+  },
+  "dependencies": {
+    "js-native": "^1.2.4",
+    "node-key-sender": "^1.0.11"
   }
 }

@@ -54,5 +54,6 @@
             "path": "./tsconfig.node.json"
         }
     ],
-    "root": "."
+    "root": ".",
+    "noImplicitAny": false
 }
