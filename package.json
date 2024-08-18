@@ -1,6 +1,6 @@
 {
   "name": "siyuan_global_zoom",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "description": "show the zoom level on your status bar",
   "repository": "",

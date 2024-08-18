@@ -46,6 +46,18 @@ export default class siyuan_global_zoom extends Plugin {
     });
 
     this.settingUtils.addItem({
+      key: "mainShowFontInfo",
+      value: 2,
+      type: "select",
+      title: this.i18n.mainShowFontInfo,
+      description: this.i18n.mainShowFontInfoDesc,
+      options: {
+        1: "100%",
+        2: "16px",
+      },
+    });
+
+    this.settingUtils.addItem({
       key: "dontDisplayIf100",
       value: false,
       type: "checkbox",
@@ -73,11 +85,12 @@ export default class siyuan_global_zoom extends Plugin {
   }
 
   showZoomInfoAndCallback() {
+
     const _mainShowZoomInfo_ = this.settingUtils.get("mainShowZoomInfo");
     const _baseZoomNumber_ = this.settingUtils.get("baseZoomNumber");
     const _dontDisplayIf100_ = this.settingUtils.get("dontDisplayIf100");
     const zoomInfoElement = document.createElement("div");
-    zoomInfoElement.classList.add("status__counter"); //套用字符数的css照顾第三方主主题
+    zoomInfoElement.classList.add("ariaLabel", "zoom_content", "zoom_content_for_theme");
     if (_mainShowZoomInfo_ == 1) {
       zoomInfoElement.setAttribute("aria-label", "AKA 1×");
     } else if (_mainShowZoomInfo_ == 2) {
@@ -90,10 +103,10 @@ export default class siyuan_global_zoom extends Plugin {
 
     const updateZoomInfo = () => {
       if (_mainShowZoomInfo_ == 1) {
-        zoomInfoElement.textContent = `${(
+        zoomInfoElement.textContent = ` ${(
           (window.devicePixelRatio / _baseZoomNumber_) *
           100
-        ).toFixed(0)}%`;
+        ).toFixed(0)}% `;
         zoomInfoElement.setAttribute(
           "aria-label",
           `AKA ${window.devicePixelRatio}×`
@@ -134,10 +147,77 @@ export default class siyuan_global_zoom extends Plugin {
     });
   }
 
+  showFontSizeAndCallback() {
+    const _mainShowFontInfo_ = this.settingUtils.get("mainShowFontInfo");
+    const _baseZoomNumber_ = 16; //it's hard coded from siyuan
+    const _dontDisplayIf100_ = this.settingUtils.get("dontDisplayIf100");
+    const zoomInfoElement = document.createElement("div");
+    zoomInfoElement.classList.add("ariaLabel", "zoom_content", "zoom_content_for_theme"); //3rd party theme use zoom_content_for_theme to style me.
+    if (_mainShowFontInfo_ == 1) {
+      zoomInfoElement.setAttribute("aria-label", "AKA 16px"); //this is just init the string, and also 16px is hard coded in siyuan
+    } else if (_mainShowFontInfo_ == 2) {
+      zoomInfoElement.setAttribute("aria-label", "AKA 100%");
+    }
+
+    // zoomInfoElement.addEventListener("click", () => {
+    //   //this call back works, just TODO
+    // });
+
+    const FetchUpdateFontSize = () => {
+      if (_mainShowFontInfo_ == 1) {
+        zoomInfoElement.textContent = ` ${(
+          (window.siyuan.config.editor.fontSize / _baseZoomNumber_) *
+          100
+        ).toFixed(0)}% `;
+        zoomInfoElement.setAttribute(
+          "aria-label",
+          `AKA ${window.siyuan.config.editor.fontSize}×`
+        );
+
+        if (_dontDisplayIf100_) {
+          if (window.siyuan.config.editor.fontSize == _baseZoomNumber_) {
+            zoomInfoElement.style.display = "none";
+          } else {
+            zoomInfoElement.style.display = "block";
+          }
+        }
+      } else if (_mainShowFontInfo_ == 2) {
+        zoomInfoElement.textContent = `${window.siyuan.config.editor.fontSize}px`;
+        zoomInfoElement.setAttribute(
+          "aria-label",
+          `AKA ${(
+            (window.siyuan.config.editor.fontSize / _baseZoomNumber_) *
+            100
+          ).toFixed(0)}%`
+        );
+
+        if (_dontDisplayIf100_) {
+          if (window.siyuan.config.editor.fontSize == _baseZoomNumber_) {
+            zoomInfoElement.style.display = "none";
+          } else {
+            zoomInfoElement.style.display = "block";
+          }
+        }
+      }
+    };
+
+    FetchUpdateFontSize();
+    console.log("new12new");
+
+    window.addEventListener("keyup", function (event) {
+      if (event.key === "Control") {
+        FetchUpdateFontSize();
+      }
+    });
+    this.addStatusBar({
+      element: zoomInfoElement,
+    });
+  }
+
   onLayoutReady() {
     if (this.settingUtils.get("mainSwitch")) {
-      // this.rescuveDangerousZoom();
       this.showZoomInfoAndCallback();
+      this.showFontSizeAndCallback();
     }
 
     // this.loadData(STORAGE_NAME);
