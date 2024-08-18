@@ -90,7 +90,7 @@ export default class siyuan_global_zoom extends Plugin {
     const _baseZoomNumber_ = this.settingUtils.get("baseZoomNumber");
     const _dontDisplayIf100_ = this.settingUtils.get("dontDisplayIf100");
     const zoomInfoElement = document.createElement("div");
-    zoomInfoElement.classList.add("ariaLabel", "zoom_content", "zoom_content_for_theme");
+    zoomInfoElement.classList.add("ariaLabel", "zoom_content", "status__counter");
     if (_mainShowZoomInfo_ == 1) {
       zoomInfoElement.setAttribute("aria-label", "AKA 1×");
     } else if (_mainShowZoomInfo_ == 2) {
@@ -109,7 +109,7 @@ export default class siyuan_global_zoom extends Plugin {
         ).toFixed(0)}% `;
         zoomInfoElement.setAttribute(
           "aria-label",
-          `AKA ${window.devicePixelRatio}×`
+          `AKA ${(window.devicePixelRatio).toFixed(2)}×`
         );
 
         if (_dontDisplayIf100_) {
@@ -120,7 +120,7 @@ export default class siyuan_global_zoom extends Plugin {
           }
         }
       } else if (_mainShowZoomInfo_ == 2) {
-        zoomInfoElement.textContent = `${window.devicePixelRatio}×`;
+        zoomInfoElement.textContent = `${(window.devicePixelRatio).toFixed(2)}×`;
         zoomInfoElement.setAttribute(
           "aria-label",
           `AKA ${((window.devicePixelRatio / _baseZoomNumber_) * 100).toFixed(
@@ -152,7 +152,7 @@ export default class siyuan_global_zoom extends Plugin {
     const _baseZoomNumber_ = 16; //it's hard coded from siyuan
     const _dontDisplayIf100_ = this.settingUtils.get("dontDisplayIf100");
     const zoomInfoElement = document.createElement("div");
-    zoomInfoElement.classList.add("ariaLabel", "zoom_content", "zoom_content_for_theme"); //3rd party theme use zoom_content_for_theme to style me.
+    zoomInfoElement.classList.add("ariaLabel", "zoom_content", "status__counter"); //3rd party theme use zoom_content_for_theme to style me.
     if (_mainShowFontInfo_ == 1) {
       zoomInfoElement.setAttribute("aria-label", "AKA 16px"); //this is just init the string, and also 16px is hard coded in siyuan
     } else if (_mainShowFontInfo_ == 2) {
@@ -171,7 +171,7 @@ export default class siyuan_global_zoom extends Plugin {
         ).toFixed(0)}% `;
         zoomInfoElement.setAttribute(
           "aria-label",
-          `AKA ${window.siyuan.config.editor.fontSize}×`
+          `AKA ${(window.siyuan.config.editor.fontSize).toFixed(2)}×`
         );
 
         if (_dontDisplayIf100_) {
@@ -182,7 +182,7 @@ export default class siyuan_global_zoom extends Plugin {
           }
         }
       } else if (_mainShowFontInfo_ == 2) {
-        zoomInfoElement.textContent = `${window.siyuan.config.editor.fontSize}px`;
+        zoomInfoElement.textContent = `${(window.siyuan.config.editor.fontSize).toFixed(0)}px`;
         zoomInfoElement.setAttribute(
           "aria-label",
           `AKA ${(
