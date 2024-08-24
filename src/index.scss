@@ -29,5 +29,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 5px
+    padding: 0 5px;
+    order: 999999998 !important //trying to keep the ? at the all the way to right
+}
+
+#statusHelp {
+    order: 999999999 !important //trying to keep the ? at the all the way to right
 }
